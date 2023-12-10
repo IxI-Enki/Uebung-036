@@ -1,4 +1,7 @@
 # Uebung-036  --  FizzBuzz
+
+###### [Angabezettel (.pdf)](https://github.com/IxI-Enki/Uebung-036/blob/main/FizzBuzz.pdf)
+
 ## Lernziele:  
  - While - Anweisung
 ## Vertiefung:
@@ -46,7 +49,14 @@
 -------------------------------
 # **SPOILER**  
 
-```c#
-
-
-```
+> [!TIP]
+>
+  > *<details><summary>[C#] Visual Studio : </summary>*
+  >
+  > ```c#
+  >
+  >
+  > ```
+  >
+  > </details>
+>
