@@ -49,14 +49,144 @@
 -------------------------------
 # **SPOILER**  
 
-> [!TIP]
->
-  > *<details><summary>[C#] Visual Studio : </summary>*
-  >
-  > ```c#
-  >
-  >
-  > ```
-  >
-  > </details>
->
+***[C#]:***
+
+```c#
+/*_________________________________libraries_________________________________*/
+using System;                   //  
+using System.Text;              //  Unicode Symbols
+using System.Threading;         //  Thread.Sleep(1000) = 1 sec
+
+/*---------------------------------- START ----------------------------------*/
+namespace FizzBuzz          //  
+{ public class Program      //
+  { static void Main()      //
+    { /*------------------------- console_settings --------------------------*/
+      const int cWidth = 100;                    //  console width
+      const int cHeight = 30;                    //  & height
+      Console.SetWindowSize(cWidth, cHeight);    //
+      Console.OutputEncoding = Encoding.UTF8;    //  Unicode Symbols
+      /*----------------------------- VARIABLES -----------------------------*/
+      string userInput;       //  
+      char userChoice;        //  
+      bool validInput;        //  
+      int counter,            //  
+          counterLenght,      //  
+          checkValue,         //  
+          lineCounter = 0;    //  
+      int endNumber;          //  
+      /*-------------------------------- HEAD -------------------------------*/
+      Console.Clear();
+      Console.Write("\n┌───────────────────────────────────────────────────┐" +
+      /* cWidth: */ "\n│ > Ausgabe für Fizz-Buzz von 1 bis 100 :           │" +
+                    "\n│      - Fizz, wenn durch 3 teilbar.                │" +
+                    "\n│      - Buzz, wenn durch 5 teilbar.                │" +
+                    "\n└───────────────────────────────────────────────────┘");
+      /*---[in:]-------------------- PROMPT_USER ----------------------------*/
+      Console.Write("\n [S/s]      : start " +    //  ✏
+                    "\n [Q/q]      : quit  " +
+                    "\n [Ganzzahl] : wähle ein anderes Spielende als 100" +
+                    "\n");
+      /*------------------------------------------------------- INPUTLOOP ---------------------------------------------------------*/
+      do                                                                                                                           //
+      {                                                                                                                            //
+        userInput = Console.ReadLine();                                                                                            //
+        /*---------------------------------------------------- CHECK THE INPUT ----------------------------------------------------*/
+        if (validInput = Int32.TryParse(userInput, out endNumber) ? true : false)    //  parse to int works: limit = input         //
+        {                                                                            //                                            //
+          userChoice = 's';                                                          //  -> choose start                           //
+        }                                                                                                                          //
+        else if (validInput = char.TryParse(userInput, out userChoice) ? true : false)    //  parse to char works: choice = input  //
+        {                                                                                 //                                       //
+          endNumber = 100;                                                                //  -> limit = 100                       //
+        }                                                                                                                          //
+        if (char.ToLower(userChoice) != 's' && char.ToLower(userChoice) != 'q' || (endNumber < 0))  // choice neither 's' nor 'q'  //
+        {                                                                                           //           or a negativ_int  //
+          Console.Write("\n ! ungültige Auswahl, bitte wiederholen sie die Eingabe \n");            //  prompt to repeat input     //
+          validInput = false;                                                                       //  -> invalid Input           //
+        }                                                                                                                          //
+      } while (!validInput);                                                                                                       //
+      /*---------------------------------------------------------------------------------------------------------------------------*/
+
+      /*---------------------------------------------------- CALCULATE OUTPUT -----------------------------------------------------*/
+      if (char.ToLower(userChoice) == 's')                    //                                                                   //
+      {                                                                                                                            //
+        Console.Write("\n");                                                                                                       //
+        for (counter = 1; counter <= endNumber; counter++)    //                                                                   //
+        {                                                                                                                          //
+          if (counter < endNumber)
+          {
+            if (counter % 3 == 0)
+            {
+              Console.Write("Fizz, ");
+              lineCounter += 6;
+            }
+            else if (counter % 5 == 0)
+            {
+              Console.Write("Buzz, ");
+              lineCounter += 6;
+            }
+            else if (counter % 3 == 0 && counter % 5 == 0)
+            {
+              Console.Write("Fizz, Buzz, ");
+              lineCounter += 12;
+            }
+            else
+            {
+              Console.Write($"{counter}, ");
+
+              checkValue = counter;
+              counterLenght = 1;
+              while (checkValue / 10 > 0)
+              {
+                checkValue = checkValue / 10;
+                counterLenght++;
+              }
+              lineCounter += counterLenght + 3;
+            }
+          }
+          else if (counter == endNumber)
+          {
+            if (counter % 3 == 0)
+            {
+              Console.Write("Fizz");
+            }
+            else if (counter % 5 == 0)
+            {
+              Console.Write("Buzz");
+            }
+            else
+            {
+              Console.Write($"{counter}, ");
+
+              checkValue = counter;
+              counterLenght = 1;
+              while (checkValue / 10 > 0)
+              {
+                checkValue = checkValue / 10;
+                counterLenght++;
+              }
+              lineCounter += counterLenght + 3;
+            }
+
+          }
+          if (cWidth <= lineCounter)
+          {
+            Console.Write("\n");
+            lineCounter = 0;
+          }
+        }
+        Console.Write("\n");
+      }
+      else if (char.ToLower(userChoice) == 'q')
+        Console.Write("\n Abbrechen gewählt.");
+      else
+        Console.Write("\n -fehler- ");
+      /*-------------------------------- END --------------------------------*/
+        Console.Write("\n Zum beenden Eingabetaste drücken..");
+      Console.ReadLine();    //  wait for [enter]
+      Console.Clear();       //
+    }
+  }
+}
+```
